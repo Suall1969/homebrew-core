@@ -8,6 +8,13 @@ class Podman < Formula
   revision 1
   head "https://github.com/containers/podman.git", branch: "main"
 
+  # checks the homepage since upstream can tag a new release for some time before
+  # it is promoted to a new GitHub release and the homepage updated
+  livecheck do
+    url :homepage
+    regex(%r{Latest stable Podman.*containers/podman/releases.*?>(\d+(?:\.\d+)+)?</a}i)
+  end
+
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "cc2f6d0f12baa2db0147c1990f1151f503412cd512223139d5c0f4642d2fae04"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "42effe46d485da0512a86c8076d5b95f8f41b6e57efcb68bead15b88d2bb2e13"
